@@ -1,8 +1,6 @@
 package br.pro.hashi.ensino.desagil.desafio;
 
-import br.pro.hashi.ensino.desagil.desafio.model.Board;
-import br.pro.hashi.ensino.desagil.desafio.model.Element;
-import br.pro.hashi.ensino.desagil.desafio.model.Model;
+import br.pro.hashi.ensino.desagil.desafio.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +23,7 @@ public class View extends JPanel {
 
     public View(Model model) {
         this.model = model;
+
 
         // Esse jeito de construir um dicionário só pode
         // ser usado se você não pretende mudá-lo depois.
@@ -53,6 +52,12 @@ public class View extends JPanel {
     public void paintComponent(Graphics g) {
         Board board = model.getBoard();
 
+        CpuPlayer cpuPlayer = model.getCpuPlayer();
+        HumanPlayer humanPlayer = model.getHumanPlayer();
+
+
+
+
         for (int i = 0; i < board.getNumRows(); i++) {
             for (int j = 0; j < board.getNumCols(); j++) {
                 if (board.isWall(i, j)) {
@@ -69,8 +74,17 @@ public class View extends JPanel {
             int row = element.getRow();
             int col = element.getCol();
 
+
+
             g.drawImage(image, col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE, this);
         });
+
+        g.setColor(Color.RED);
+
+
+        g.drawString("Jogador:" + humanPlayer.getPoints(), humanPlayer.getCol()* CELL_SIZE,humanPlayer.getRow()* CELL_SIZE);
+        g.drawString("Computador:" + cpuPlayer.getPoints(),cpuPlayer.getCol()* CELL_SIZE,cpuPlayer.getRow()* CELL_SIZE);
+
 
         // Linha necessária para evitar atrasos
         // de renderização em sistemas Linux.

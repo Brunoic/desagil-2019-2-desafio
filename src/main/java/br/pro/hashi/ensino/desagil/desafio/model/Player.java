@@ -21,4 +21,8 @@ public abstract class Player extends Element {
 	public void incrementPoints() {
     	this.points++;
 	}
+
+    public void addPoint() {
+        points += 1;
+    }
 }
